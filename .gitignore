@@ -1,0 +1,22 @@
+# Dependencias de Node.js
+node_modules/
+
+# Base de datos generada por el servidor
+visits.db
+
+# Variables de entorno (nunca subirlas a GitHub)
+.env
+
+# Archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Carpetas de editor
+.vscode/
+.idea/
