@@ -131,3 +131,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor contador activo en puerto ${PORT}`);
 });
+
+app.get("/", (req, res) => {
+  res.send("🚀 Contador de visitas funcionando. Usa /visitas para ver el contador.");
+});
