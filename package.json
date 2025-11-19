@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TU_USUARIO/contador-visitas.git"
+    "url": "git+https://github.com/Luisferr2010/contador-visitas.git"
   },
   "keywords": [
     "contador",
@@ -19,11 +19,8 @@
     "sqlite",
     "render"
   ],
-  "author": "Tu Nombre",
+  "author": "Luis Ferreira",
   "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
     "better-sqlite3": "^9.0.0",
     "cors": "^2.8.5",
@@ -33,6 +30,9 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
 
