@@ -128,6 +128,47 @@ app.get("/admin/count", (req, res) => {
 // -------------------------------
 const PORT = process.env.PORT || 3000;
 
+// -------------------------------
+// ENDPOINT: /visitas (GET) - contador simple
+// -------------------------------
+app.get("/visitas", (req, res) => {
+    try {
+        const raw_ip =
+            req.headers["cf-connecting-ip"] ||
+            req.headers["x-forwarded-for"] ||
+            req.socket.remoteAddress;
+
+        const ip_hash = hashIP(raw_ip.toString());
+        const path = "/";
+
+        // Registrar visita si no existe en 24h
+        const exists = db
+            .prepare(
+                "SELECT 1 FROM visits WHERE path = ? AND hash = ? AND created_at >= datetime('now','-1 day')"
+            )
+            .get(path, ip_hash);
+
+        if (!exists) {
+            db.prepare("INSERT INTO visits (path, hash) VALUES (?, ?)").run(
+                path,
+                ip_hash
+            );
+        }
+
+        // Total de visitas
+        const total = db
+            .prepare("SELECT COUNT(*) AS c FROM visits WHERE path = ?")
+            .get(path).c;
+
+        res.json({ visitas: total });
+    } catch (err) {
+        console.error("Error en /visitas:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
 app.listen(PORT, () => {
     console.log(`Servidor contador activo en puerto ${PORT}`);
 });
